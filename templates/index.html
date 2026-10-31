@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Student Performance Prediction</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #4e73df, #1cc88a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 30px 35px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            width: 380px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #4e73df;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #4e73df;
+            outline: none;
+            box-shadow: 0 0 8px rgba(78,115,223,0.3);
+        }
+
+        button {
+            background: linear-gradient(to right, #4e73df, #224abe);
+            color: white;
+            padding: 12px;
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.03);
+        }
+
+        .result {
+            margin-top: 20px;
+            background: #f8f9fc;
+            padding: 15px;
+            border-radius: 15px;
+            text-align: left;
+        }
+
+        .pass {
+            color: green;
+            font-weight: bold;
+        }
+
+        .fail {
+            color: red;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>AI Based Student Performance</h2>
+
+    <form method="POST">
+        <input type="number" name="telugu" placeholder="Telugu Marks" value="{{ telugu }}" min="0" max="100" required>
+        <input type="number" name="hindi" placeholder="Hindi Marks" value="{{ hindi }}" min="0" max="100" required>
+        <input type="number" name="english" placeholder="English Marks" value="{{ english }}" min="0" max="100" required>
+        <input type="number" name="maths" placeholder="Maths Marks" value="{{ maths }}" min="0" max="100" required>
+        <input type="number" name="science" placeholder="Science Marks" value="{{ science }}" min="0" max="100" required>
+        <input type="number" name="social" placeholder="Social Marks" value="{{ social }}" min="0" max="100" required>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+    <div class="result">
+        <p><b>Total:</b> {{ total }}</p>
+        <p><b>Average:</b> {{ "%.2f"|format(average) }}</p>
+        <p><b>Grade:</b> {{ grade }}</p>
+
+        {% if prediction == "PASS" %}
+            <p><b>Result:</b> <span class="pass">{{ prediction }}</span></p>
+        {% else %}
+            <p><b>Result:</b> <span class="fail">{{ prediction }}</span></p>
+        {% endif %}
+
+    </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
